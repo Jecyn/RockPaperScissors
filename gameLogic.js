@@ -23,7 +23,6 @@ function getComputerSelection(){
             break;
         default:
             return 'What?'
-            break;
     }
     console.log("Computer choice: " + compChoice)
     return compChoice
@@ -60,8 +59,8 @@ function playRound(computerChoice, playerSelection){
         }
 
     if ((computerChoice == "paper" && playerchoice == 'rock') ||
-    (computerChoice == "rock" && playerchoice == 'scissors') ||
-    (computerChoice == "scissors" && playerchoice == 'paper'))
+        (computerChoice == "rock" && playerchoice == 'scissors') ||
+        (computerChoice == "scissors" && playerchoice == 'paper'))
         {
             console.log(`You lose! ${computerChoice} beats ${playerchoice}!` )
             roundWinner = "computer"
