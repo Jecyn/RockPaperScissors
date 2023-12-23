@@ -10,6 +10,17 @@ let playerchoice;
 const rockButton = document.querySelector('#rock');
 const paperButton = document.querySelector('#paper');
 const scissorsButton = document.querySelector('#scissors');
+const playerScore = document.querySelector('#playerScoreDisplay')
+const ComputerScore = document.querySelector('#computerScoreDisplay')
+const tieScore = document.querySelector('#tieScoreDisplay')
+const gameplay = document.querySelector('#gameplay')
+const currentScore = document.querySelector('#currentScore')
+const makeChoice = document.querySelector("#makeChoice")
+const replayButton = document.querySelector('#replayButton')
+const buttonsSection = document.querySelector('buttons')
+
+
+
 
 
 rockButton.addEventListener('click', () =>{
@@ -27,7 +38,8 @@ scissorsButton.addEventListener('click', () =>{
     playRound(computerChoice, playerchoice)
 })
 
-//test
+replayButton.addEventListener('click', restartGame)
+
 function getComputerSelection(){
     let ranNumber = Math.floor(Math.random() * 3)
     let compChoice;
@@ -48,20 +60,32 @@ function getComputerSelection(){
     return compChoice
 }
 
-// function getPlayerSelection(){
-//     let playerchoice = prompt("Please type Rock, Paper, or Scissors: ", "Type your answer here")
-//     let lowerCasePlayerChoice = playerchoice.toLowerCase()
-//     console.log("Computer choice: " + lowerCasePlayerChoice)
-//     return lowerCasePlayerChoice
-// }
+function restartGame(){
+    totalRoundsPlayed = 0;
+    playerWins = 0;
+    computerWins = 0;
+    tiedGames = 0;
+    rockButton.className = "visible"
+    scissorsButton.className = "visible"
+    paperButton.className = "visible"
+    gameplay.className = "visible"
+    currentScore.textContent = "Current Score"
+    playerScore.textContent = `Player: ${playerWins}`
+    ComputerScore.textContent = `Computer: ${computerWins}`
+    tieScore.textContent = `Tie: ${tiedGames}`
+    gameplay.textContent = ''
+    makeChoice.textContent = "Make your choice"
+    
+}
 
 function playRound(computerChoice, playerSelection){
 
     computerChoice = getComputerSelection()
     playerChoice = playerSelection;
 
+    
     if(computerChoice == playerChoice){
-        console.log("It's a tie!")
+        gameplay.textContent = ("It's a tie!")
         roundWinner = "Its a tie"
         tiedGames++
         totalRoundsPlayed++
@@ -70,7 +94,7 @@ function playRound(computerChoice, playerSelection){
         (playerchoice == "rock" && computerChoice == 'scissors') ||
         (playerchoice == "scissors" && computerChoice == 'paper'))
         {
-            console.log(`Player Wins! ${playerchoice} beats ${computerChoice}!` )
+            gameplay.textContent = `You win this round! ${playerchoice} beats ${computerChoice}!`
             roundWinner = "player"
             totalRoundsPlayed++
             playerWins++
@@ -81,24 +105,35 @@ function playRound(computerChoice, playerSelection){
         (computerChoice == "rock" && playerchoice == 'scissors') ||
         (computerChoice == "scissors" && playerchoice == 'paper'))
         {
-            console.log(`You lose! ${computerChoice} beats ${playerchoice}!` )
+            gameplay.textContent = (`You lose this round. ${computerChoice} beats ${playerchoice}!` )
             roundWinner = "computer"
             totalRoundsPlayed++
             computerWins++
         }
-    console.log("\nRound Winner: " + roundWinner +"\n\nPlayer wins: " + playerWins + "\nComputer Wins: " + computerWins + "\nTies: " + tiedGames + "\nTotal Rounds played: " + totalRoundsPlayed)
+    if (totalRoundsPlayed >= 5 ){
+        gameOverMessage()
+    }
+    playerScore.textContent = `Player: ${playerWins}`
+    ComputerScore.textContent = `Computer: ${computerWins}`
+    tieScore.textContent = `Tie: ${tiedGames}`
 }
 
-function game(){
-    if(playerWins == computerWins){
-        console.log("\nThe final score is a tie!")
+function gameOverMessage(){
+    rockButton.className = "hidden"
+    scissorsButton.className = "hidden"
+    paperButton.className = "hidden"
+    gameplay.className = "hidden"
+    currentScore.textContent = "Final Score"
+
+
+    if(playerWins === computerWins){
+        makeChoice.textContent = ("\nThe final score is a tie!")
     }
-    if(playerWins > computerWins){
-        console.log("\nPlayer Wins the match!")
+    else if(playerWins > computerWins){
+        makeChoice.textContent =("\nPlayer Wins the match!")
     }
     else{
-        console.log("\nThe Computer wins the match!")
+        makeChoice.textContent =("\nThe Computer wins the match!")
     }
-
 }
 
