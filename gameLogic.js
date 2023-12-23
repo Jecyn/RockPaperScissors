@@ -7,6 +7,7 @@ let tiedGames = 0
 let computerChoice;
 let playerchoice;
 
+//test
 function getComputerSelection(){
     let ranNumber = Math.floor(Math.random() * 3)
     let compChoice;
