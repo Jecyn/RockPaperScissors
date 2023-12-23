@@ -7,11 +7,30 @@ let tiedGames = 0
 let computerChoice;
 let playerchoice;
 
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+
+
+rockButton.addEventListener('click', () =>{
+    playerchoice = 'rock'
+    playRound(computerChoice, playerchoice)
+})
+
+paperButton.addEventListener('click', () =>{
+    playerchoice = 'paper'
+    playRound(computerChoice, playerchoice)
+})
+
+scissorsButton.addEventListener('click', () =>{
+    playerchoice = 'scissors'
+    playRound(computerChoice, playerchoice)
+})
+
 //test
 function getComputerSelection(){
     let ranNumber = Math.floor(Math.random() * 3)
     let compChoice;
-    //console.log(ranNumber)
     switch(ranNumber) {
         case 0:
             compChoice = 'paper'
@@ -29,20 +48,19 @@ function getComputerSelection(){
     return compChoice
 }
 
-function getPlayerSelection(){
-    let playerchoice = prompt("Please type Rock, Paper, or Scissors: ", "Type your answer here")
-    let lowerCasePlayerChoice = playerchoice.toLowerCase()
-    console.log("Computer choice: " + lowerCasePlayerChoice)
-    return lowerCasePlayerChoice
-}
+// function getPlayerSelection(){
+//     let playerchoice = prompt("Please type Rock, Paper, or Scissors: ", "Type your answer here")
+//     let lowerCasePlayerChoice = playerchoice.toLowerCase()
+//     console.log("Computer choice: " + lowerCasePlayerChoice)
+//     return lowerCasePlayerChoice
+// }
 
 function playRound(computerChoice, playerSelection){
 
     computerChoice = getComputerSelection()
-    playerchoice = getPlayerSelection()
+    playerChoice = playerSelection;
 
-
-    if(computerChoice == playerSelection){
+    if(computerChoice == playerChoice){
         console.log("It's a tie!")
         roundWinner = "Its a tie"
         tiedGames++
@@ -72,12 +90,6 @@ function playRound(computerChoice, playerSelection){
 }
 
 function game(){
-    playRound(computerChoice, playerchoice)
-    playRound(computerChoice, playerchoice)
-    playRound(computerChoice, playerchoice)
-    playRound(computerChoice, playerchoice)
-    playRound(computerChoice, playerchoice)
-
     if(playerWins == computerWins){
         console.log("\nThe final score is a tie!")
     }
@@ -89,6 +101,4 @@ function game(){
     }
 
 }
-
-game()
 
